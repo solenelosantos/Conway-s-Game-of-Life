@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "jeu"
+version = "0.1.0"
+description = ""
+authors = ["Solène Losantos <solene.losantos@etu.minesparis.psl.eu>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+GameofLife = "jeu.main:main"
+
+[tool.poetry.dependencies]
+python = ">=3.6,<4.0"
+pygame = "^2.6.1"
