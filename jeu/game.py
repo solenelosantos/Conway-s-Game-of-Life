@@ -21,13 +21,14 @@ class Game :
         """Print the grid with Pygame."""
         for x in range(self._height):
             for y in range(self._width):
-                color = (255, 255, 255) if self._pattern[x][y] == 1 else (254, 53, 117)
+                color = (255, 255, 255) if self._pattern[x][y] == 1 else (0,0,0)
+                rect = pygame.Rect(y, x, self._cell_size, self._cell_size)
                 pygame.draw.rect(
                 self._screen, color, 
-                (y * self._cell_size, x * self._cell_size, self._cell_size, self._cell_size)
+                rect
                 )
+                
         pygame.display.flip()
-
 
     def count_neighbors(self, x: int, y: int) -> int:
         """Count the number of cells alive around one cell (8 neighbors)."""
@@ -51,8 +52,6 @@ class Game :
                 alive_neighbors = self.count_neighbors(x, y)
                 if self._pattern[x][y] == 1 and (alive_neighbors < 2 or alive_neighbors > 3):
                     new_pattern[x][y] = 0  # Died by under/overpopulation
-                    
                 elif self._pattern[x][y] == 0 and alive_neighbors == 3:
-                    new_pattern[x][y] = 1  # Born by reproduction
-        print(new_pattern)            
+                    new_pattern[x][y] = 1  # Born by reproduction            
         self._pattern = new_pattern

@@ -3,11 +3,20 @@ from .cmd_line import cmd_line
 class Pattern:
     def __init__(self, pattern: list[list[int]]):
         args=cmd_line()
-        self._pattern= [[0]*args.width for _ in range(args.height)]
-        width, height= len(pattern[0]), len(pattern)
+        self._pattern= [[0]*(args.width) for _ in range(args.height)]
+        self.place_pattern(pattern, args)
+
+    def place_pattern(self, pattern, args):
+        """Place le pattern au centre de la grille"""
+        width, height = len(pattern[0]), len(pattern)
         for x in range(height):
             for y in range(width):
-                self._pattern[x+int((args.width-width)/2)][y+int((args.height-height)/2)]=pattern[x][y]
+                new_x = x + (args.height - height) // 2
+                new_y = y + (args.width - width) // 2
+                if 0 <= new_x < args.height and 0 <= new_y < args.width:
+                    self._pattern[new_x][new_y] = pattern[x][y]
+                else:
+                    print(f" Problème d'indexation : ({new_x}, {new_y}) hors limites")
 
 
     def get_pattern(self) -> list[list[int]]:

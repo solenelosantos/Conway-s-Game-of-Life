@@ -9,11 +9,15 @@ def main():
     
 
     clock = pygame.time.Clock()
+    
     args= cmd_line()
+    
     pattern=Pattern.load(args.input_file)
     screen=pygame.display.set_mode( (args.width, args.height) )
-    screen.fill( (254, 53, 117 ))
+    screen.fill( (0, 0, 0 ))
+
     game= Game(cell_size = args.cell_size,screen=screen, pattern =pattern)
+
 
     while args.d:
 
@@ -27,7 +31,8 @@ def main():
         
 
         pygame.display.update()
-    
+
     pygame.quit()
+    
 
     
