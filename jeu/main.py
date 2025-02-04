@@ -1,27 +1,30 @@
 import pygame
 from .cmd_line import cmd_line
 from .pattern import Pattern
-
+from .game import Game
 def main():
 
     pygame.init()
 
-    screen = pygame.display.set_mode( (600, 400) )
+    
 
     clock = pygame.time.Clock()
     args= cmd_line()
+    pattern=Pattern.load(args.input_file)
+    screen=pygame.display.set_mode( (args.width, args.height) )
+    screen.fill( (254, 53, 117 ))
+    game= Game(cell_size = args.cell_size,screen=screen, pattern =pattern)
 
     while args.d:
 
-        clock.tick(1)
+        clock.tick(args.fps)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 args.d = False
-                
-        self.grid.update()  # Met à jour la grille
-        self.draw_grid()
-        screen.fill( (255 ,255, 255) )
+        game.update()  # Met à jour la grille
+        game.draw_pattern()
+        
 
         pygame.display.update()
     

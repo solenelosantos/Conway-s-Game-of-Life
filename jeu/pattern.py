@@ -1,7 +1,18 @@
+from .cmd_line import cmd_line
+
 class Pattern:
     def __init__(self, pattern: list[list[int]]):
-        self._pattern= pattern
+        args=cmd_line()
+        self._pattern= [[0]*args.width for _ in range(args.height)]
+        width, height= len(pattern[0]), len(pattern)
+        for x in range(height):
+            for y in range(width):
+                self._pattern[x+int((args.width-width)/2)][y+int((args.height-height)/2)]=pattern[x][y]
 
+
+    def get_pattern(self) -> list[list[int]]:
+        return self._pattern
+    
 
     @staticmethod
     def load(filename: str = "my_initial_file.txt") -> "Pattern":
@@ -24,7 +35,7 @@ class Pattern:
     def default() -> "Pattern":
         """Return a default instance with predefined initial pattern."""
         return Pattern(
-            pattern=[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0,0,0,0,0,0,0,0],
+            pattern=[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
                      [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
                      [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
