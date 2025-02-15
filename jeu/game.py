@@ -19,10 +19,10 @@ class Game :
 
     def draw_pattern(self):
         """Print the grid with Pygame."""
-        for x in range(self._height):
-            for y in range(self._width):
+        for x in range(100):
+            for y in range(100):
                 color = (255, 255, 255) if self._pattern[x][y] == 1 else (0,0,0)
-                rect = pygame.Rect(y, x, self._cell_size, self._cell_size)
+                rect = pygame.Rect(y*self._cell_size, x*self._cell_size, self._cell_size, self._cell_size)
                 pygame.draw.rect(
                 self._screen, color, 
                 rect
@@ -46,9 +46,9 @@ class Game :
     
     def update(self):
         """Update the grid according to rules of Game of Life."""
-        new_pattern = [[self._pattern[x][y] for y in range(self._width)] for x in range(self._height)]
-        for x in range(1,self._height-1):
-            for y in range(1,self._width-1):
+        new_pattern = [[self._pattern[x][y] for y in range(100)] for x in range(100)]
+        for x in range(1,100-1):
+            for y in range(1,100-1):
                 alive_neighbors = self.count_neighbors(x, y)
                 if self._pattern[x][y] == 1 and (alive_neighbors < 2 or alive_neighbors > 3):
                     new_pattern[x][y] = 0  # Died by under/overpopulation
