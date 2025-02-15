@@ -27,6 +27,7 @@ def main()-> None:
         clock.tick(args.fps)
         for event in pygame.event.get():
             if event.type == pygame.QUIT or step>args.m:
+                game.save(args.output_file)
                 args.d = False
         # Update the grid
         game.update()

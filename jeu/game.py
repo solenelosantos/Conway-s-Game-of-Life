@@ -59,3 +59,9 @@ class Game :
                 elif self._pattern[x][y] == 0 and alive_neighbors == 3:
                     new_pattern[x][y] = 1  # Born by reproduction
         self._pattern = new_pattern
+
+    def save(self, filename: str= "my_output_file.txt")-> None:
+        """Set the path to the output file,contain the final state of our simulation."""
+        with open(filename, "w") as f:
+            for row in self._pattern:
+                f.write("".join(str(cell) for cell in row) + "\n")

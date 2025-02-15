@@ -41,7 +41,6 @@ class Pattern:
             # If the file doesn't exist, create one with default initial pattern
             return Pattern.default()
 
-
     @staticmethod
     def default() -> "Pattern":
         """Return a default instance with predefined initial pattern."""

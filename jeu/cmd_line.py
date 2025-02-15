@@ -14,12 +14,12 @@ def cmd_line()-> argparse.Namespace:
                         default="my_initial_file.txt")
     parser.add_argument("-o", "--output_file", type=Path,
                         help="Set the path to the output file,contains the final state",
-                        default="my_output_file.tx")
+                        default="my_output_file.txt")
 
     # FPS
     parser.add_argument("--fps", type= int,
                         help= "The number of frames per second to use with pygame",
-                        default=50)
+                        default=20)
 
     # Game options
     parser.add_argument("-d", type=bool,
@@ -27,8 +27,8 @@ def cmd_line()-> argparse.Namespace:
                         default=True)
     parser.add_argument("-m", type= int,
                         help="Set the number of steps to run.",
-                        default= 100)
-    
+                        default= 500)
+
     # Size of the screen and cells
     parser.add_argument("-W","--width", type=int,
                         help="The width of the pygame screen",
