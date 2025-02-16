@@ -11,3 +11,7 @@ GameofLife = "jeu.main:main"
 [tool.poetry.dependencies]
 python = ">=3.6,<4.0"
 pygame = "^2.6.1"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D203", "D212"]

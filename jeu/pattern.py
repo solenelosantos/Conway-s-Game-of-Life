@@ -1,12 +1,14 @@
 
-
 class Pattern:
-    def __init__(self, pattern: list[list[int]]):
+    """The class of the pattern."""
+
+    def __init__(self, pattern: list[list[int]])-> None:
+        """Object initialization."""
         self._pattern= [[0]*(100) for _ in range(100)]
         self.place_pattern(pattern)
 
-    def place_pattern(self, pattern):
-        """Place le pattern au centre de la grille"""
+    def place_pattern(self, pattern : list[list[int]]) -> None:
+        """Place the pattern at the center of the grid."""
         width, height = len(pattern[0]), len(pattern)
         for x in range(height):
             for y in range(width):
@@ -19,25 +21,25 @@ class Pattern:
 
 
     def get_pattern(self) -> list[list[int]]:
+        """Allow access to the pattern."""
         return self._pattern
-    
+
 
     @staticmethod
     def load(filename: str = "my_initial_file.txt") -> "Pattern":
-        """Load pattern from a text file or create a file with default pattern if it doesn't exist."""
+        """Load pattern from a text file or create a file with default pattern if it doesn't exist."""  # noqa: E501
         try:
-            with open(filename, "r") as f:
+            with open(filename) as f:
                 # Read lines and convert convert it into a list of lists of integers.
-                initial_pattern = [[int(char) for char in line.strip()] for line in f if line.strip()]
-                if not initial_pattern:  # Vérifier si le fichier était vide
+                initial_pattern = [[int(char) for char in line.strip()] for line in f if line.strip()]  # noqa: E501
+                if not initial_pattern:  # Check if the file is empty.
                     print("File exists but is empty. Creating default pattern.")
                     return Pattern.default()
                 return Pattern(initial_pattern)
         except FileNotFoundError:
-            print(f"File {filename} not found, creating a new file with default initial pattern.")  # Debug
+            print(f"File {filename} not found, creating a new file with default initial pattern.")  # noqa: E501
             # If the file doesn't exist, create one with default initial pattern
             return Pattern.default()
-        
 
     @staticmethod
     def default() -> "Pattern":
