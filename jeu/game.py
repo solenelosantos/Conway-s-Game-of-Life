@@ -1,9 +1,11 @@
 # Standart
+import logging
+
 import pygame
 
 # First party
 from .cmd_line import cmd_line
-from .pattern import Pattern
+from .pattern import Pattern, logger
 
 
 class Game :
@@ -25,7 +27,7 @@ class Game :
         """Print the grid with Pygame."""
         for x in range(100):
             for y in range(100):
-                color = (255, 255, 255) if self._pattern[x][y] == 1 else (0,0,0)
+                color = (0, 0, 0) if self._pattern[x][y] == 1 else (255,255,255)
                 rect = pygame.Rect(y*self._cell_size, x*self._cell_size,
                                    self._cell_size, self._cell_size)
                 pygame.draw.rect(
@@ -61,7 +63,9 @@ class Game :
         self._pattern = new_pattern
 
     def save(self, filename: str= "my_output_file.txt")-> None:
-        """Set the path to the output file,contain the final state of our simulation."""
+        """Set the path to the output file : the final state of our simulation."""
+        logger.setLevel(logging.INFO)
+        logger.info("The last path was saved to the outpul file.")
         with open(filename, "w") as f:
             for row in self._pattern:
                 f.write("".join(str(cell) for cell in row) + "\n")

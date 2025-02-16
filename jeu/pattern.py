@@ -1,3 +1,11 @@
+# Standart
+import logging
+import sys
+
+handler = logging.StreamHandler(sys.stderr)
+logger = logging.getLogger("foo")
+logger.addHandler(handler) # Registration of the new handler
+
 
 class Pattern:
     """The class of the pattern."""
@@ -17,7 +25,7 @@ class Pattern:
                 if 0 <= new_x < 100 and 0 <= new_y < 100:
                     self._pattern[new_x][new_y] = pattern[x][y]
                 else:
-                    print(f" Problème d'indexation : ({new_x}, {new_y}) hors limites")
+                    print(f" Indexing error : ({new_x}, {new_y}) out of bounds")
 
 
     def get_pattern(self) -> list[list[int]]:
@@ -33,12 +41,14 @@ class Pattern:
                 # Read lines and convert convert it into a list of lists of integers.
                 initial_pattern = [[int(char) for char in line.strip()] for line in f if line.strip()]  # noqa: E501
                 if not initial_pattern:  # Check if the file is empty.
-                    print("File exists but is empty. Creating default pattern.")
+                    logger.debug("File exists but is empty. Creating default pattern.")
                     return Pattern.default()
+                logger.setLevel(logging.INFO)
+                logger.info("The initial path was downloaded from the input file.")
                 return Pattern(initial_pattern)
         except FileNotFoundError:
-            print(f"File {filename} not found, creating a new file with default initial pattern.")  # noqa: E501
             # If the file doesn't exist, create one with default initial pattern
+            logger.debug("File not found, creating a new file with default initial pattern.")  # noqa: E501
             return Pattern.default()
 
     @staticmethod

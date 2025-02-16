@@ -2,6 +2,10 @@
 import argparse
 from pathlib import Path
 
+# Default values
+DEFAULT_WIDTH= 400
+DEFAULT_HEIGHT= 400
+DEFAULT_CELL_SIZE=4
 
 def cmd_line()-> argparse.Namespace:
     """Read command line arguments."""
@@ -32,12 +36,12 @@ def cmd_line()-> argparse.Namespace:
     # Size of the screen and cells
     parser.add_argument("-W","--width", type=int,
                         help="The width of the pygame screen",
-                        default=400)
+                        default=DEFAULT_WIDTH)
     parser.add_argument("-H", "--height", type=int,
                         help="The height of the pygame screen",
-                        default=400)
+                        default=DEFAULT_HEIGHT)
     parser.add_argument("--cell_size", type = int,
                         help= "The size of a cell",
-                        default=4)
+                        default=DEFAULT_CELL_SIZE)
 
     return parser.parse_args()

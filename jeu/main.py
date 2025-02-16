@@ -15,11 +15,15 @@ def main()-> None:
 
     args= cmd_line()
 
+    # Load the initial pattern
     pattern=Pattern.load(args.input_file)
-    screen=pygame.display.set_mode( (args.width, args.height) )
-    screen.fill( (0, 0, 0 ))
 
+    # Create the screen and launch the game
+    screen=pygame.display.set_mode( (args.width, args.height) )
+    screen.fill( (255, 255, 255 ))
     game= Game(cell_size = args.cell_size,screen=screen, pattern =pattern)
+
+    # Number of steps to run
     step=0
 
     while args.d:
@@ -27,12 +31,16 @@ def main()-> None:
         clock.tick(args.fps)
         for event in pygame.event.get():
             if event.type == pygame.QUIT or step>args.m:
+                # Save the last pattern
                 game.save(args.output_file)
                 args.d = False
+
         # Update the grid
         game.update()
         game.draw_pattern()
         pygame.display.update()
+
+        # Increase the step
         step+=1
 
     pygame.quit()
